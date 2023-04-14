@@ -11,6 +11,7 @@ To run the code, you need to have the following requirements:
 
 * Python 3
 * Jupyter Notebook
+* Some models may requires more than 22 GB of VRAM
 
 ## How to use
 1. Clone the repository to your local machine.
