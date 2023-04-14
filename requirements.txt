@@ -1,0 +1,9 @@
+lightning
+torch
+langchain>=0.0.94
+openai>=0.26.5
+transformers>=4.26.1
+sentencepiece 
+accelerate  
+sentence-transformers 
+git+https://github.com/Lightning-AI/lit-llama.git
