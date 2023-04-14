@@ -112,9 +112,9 @@ class LitLlamaPipeline(LLM, BaseModel):
         return model_LLM.transformer.wte, tokenizer_LLM, fabric_LLM.device
 
     def _call(self, prompt: str, stop: Optional[List[str]] = None):
-        max_new_tokens = 200
-        top_k = 200
-        temperature  =  0.7
+        max_new_tokens = 70
+        top_k = 100
+        temperature  =  0.2
 
         encoded_prompt = tokenizer_LLM.encode(prompt, bos=True, eos=False, device=fabric_LLM.device)
         encoded_prompt = encoded_prompt[None, :]  # add batch dimension

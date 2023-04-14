@@ -57,11 +57,11 @@ class CustomPipeline(LLM, BaseModel):
     def _call(self, prompt: str, stop: Optional[List[str]] = None):
         if model_name == "facebook/opt-iml-max-30b":
             prompt_length = len(prompt)
-            response = model(prompt,max_new_tokens = 300)[0]["generated_text"]
+            response = model(prompt,max_new_tokens = 70)[0]["generated_text"]
             return response
         else:
             with torch.no_grad():
                 input_ids = tokenizer(prompt, return_tensors="pt").input_ids.to("cuda")
-                outputs = model.generate(input_ids)
+                outputs = model.generate(input_ids, max_new_tokens = 70)
                 response = tokenizer.decode(outputs[0], skip_special_tokens=True)
                 return response
