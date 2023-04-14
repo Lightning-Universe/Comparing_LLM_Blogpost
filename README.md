@@ -9,8 +9,8 @@ In the `comparing_LLM.ipynb` notebook, you'll be able to call any of the models 
 ## Requirements
 To run the code, you need to have the following requirements:
 
-Python 3
-Jupyter Notebook
+* Python 3
+* Jupyter Notebook
 
 ## How to use
 1. Clone the repository to your local machine.
