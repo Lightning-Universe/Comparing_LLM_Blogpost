@@ -13,9 +13,9 @@ Python 3
 Jupyter Notebook
 
 ## How to use
-* Clone the repository to your local machine.
-* Install the required dependencies: `pip install -r requirements.txt`
-* Open `comparing_LLM.ipynb` using Jupyter Notebook.
-* Follow the instructions in the notebook to test the different LLMs.
+1. Clone the repository to your local machine.
+2. Install the required dependencies: `pip install -r requirements.txt`
+3. Open `comparing_LLM.ipynb` using Jupyter Notebook.
+4. Follow the instructions in the notebook to test the different LLMs.
 
 
