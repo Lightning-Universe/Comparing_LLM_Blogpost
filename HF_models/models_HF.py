@@ -38,9 +38,6 @@ class CustomPipeline(LLM, BaseModel):
         elif model_id == "EleutherAI/gpt-neox-20b":
             model = GPTNeoXForCausalLM.from_pretrained(model_id, device_map=device_map) 
             tokenizer = GPTNeoXTokenizerFast.from_pretrained(model_id)
-        elif model_id == "Salesforce/codegen-16B-mono":
-            model = AutoModelForCausalLM.from_pretrained(model_id, device_map=device_map) 
-            tokenizer = AutoTokenizer.from_pretrained(model_id)
         elif model_id == "EleutherAI/pythia-12b-deduped":
             model = GPTNeoXForCausalLM.from_pretrained(
                         model_id,

@@ -1,9 +1,14 @@
-lightning
-torch
 langchain>=0.0.94
 openai>=0.26.5
 transformers>=4.26.1
 sentencepiece 
 accelerate  
 sentence-transformers 
+torch>=2.0.0
+lightning>=2.0.0
+tqdm  # convert_checkpoint.py
+numpy  # train.py dataset memmap
+jsonargparse[signatures]  # generate.py, convert_checkpoint.py CLI
+bitsandbytes  # quantization.py
+datasets  # evaluate.py
 git+https://github.com/Lightning-AI/lit-llama.git
