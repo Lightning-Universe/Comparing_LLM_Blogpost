@@ -47,18 +47,40 @@ class CustomPipeline(LLM, BaseModel):
                         model_id,
                         revision="step3000",
                         )
+        elif model_id == "dolly-v2-12":
+            model = pipeline(model="databricks/dolly-v2-12b", torch_dtype=torch.bfloat16, trust_remote_code=True, device_map="auto")
+            tokenizer = AutoTokenizer.from_pretrained("databricks/dolly-v2-12b", padding_side="left")
+        elif model_id == "t5-11b":
+            model = T5ForConditionalGeneration.from_pretrained("t5-11b",torch_dtype=torch.bfloat16, device_map=device_map)
+            tokenizer = T5Tokenizer.from_pretrained("t5-11b")
+        elif model_id== "ul2":
+            model = T5ForConditionalGeneration.from_pretrained("google/ul2", torch_dtype=torch.bfloat16, device_map=device_map)                                                                                                  
+            tokenizer = AutoTokenizer.from_pretrained("google/ul2")
+        elif model_id == "OPT":
+            model = AutoModelForCausalLM.from_pretrained("facebook/opt-66b", torch_dtype=torch.bfloat16, device_map=device_map)
+            tokenizer = AutoTokenizer.from_pretrained("facebook/opt-66b", use_fast=False)
+        elif model_id == "Cerebras-GPT-13B":
+            tokenizer = AutoTokenizer.from_pretrained("cerebras/Cerebras-GPT-13B")
+            model = AutoModelForCausalLM.from_pretrained("cerebras/Cerebras-GPT-13B",torch_dtype=torch.bfloat16, device_map=device_map)
+        elif model_id == "nomic-ai/gpt4all-j":
+            model = AutoModelForCausalLM.from_pretrained("nomic-ai/gpt4all-j", revision="v1.2-jazzy",torch_dtype=torch.bfloat16, device_map=device_map)
+            tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-j-6B")
+            print(tokenizer)
+
+
+        print(model_name)
     @property
     def _llm_type(self) -> str:
         return "custom_pipeline"
     
     def _call(self, prompt: str, stop: Optional[List[str]] = None):
-        if model_name == "facebook/opt-iml-max-30b":
+        if model_name == "facebook/opt-iml-max-30b" or model_name == "dolly-v2-12":
             prompt_length = len(prompt)
             response = model(prompt,max_new_tokens = 70)[0]["generated_text"]
             return response
         else:
             with torch.no_grad():
-                input_ids = tokenizer(prompt, return_tensors="pt").input_ids.to("cuda")
+                input_ids = tokenizer(prompt, return_tensors="pt").input_ids.to(model.device)
                 outputs = model.generate(input_ids, max_new_tokens = 70)
                 response = tokenizer.decode(outputs[0], skip_special_tokens=True)
                 return response
